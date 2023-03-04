@@ -24,6 +24,7 @@ public:
 void printList(Node*n){
     while(n!= NULL){
         cout<< n->getValor()<< endl;
+        n = n->getNext();
     }
 }
 
@@ -34,9 +35,11 @@ int main(){
     Node*third = new Node();
 
     head->setValor(1); 
-    head -> set
+    head -> setNext(second);
     second->setValor(2);
+    second -> setNext(third);
     third -> setValor(3);
+    third -> setNext(NULL);
 
     printList(head);
     cout << "ay lmaoo";
