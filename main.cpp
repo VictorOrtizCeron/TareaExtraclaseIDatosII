@@ -6,7 +6,7 @@ class Node {
 public:
     int valor;
     Node* NextPTR;
-
+    
 };
 
 int main(){
