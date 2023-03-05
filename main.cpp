@@ -3,6 +3,8 @@ using namespace std;
 
 
 class Node {
+
+
 private:
     int valor;
     Node* NextPTR;
