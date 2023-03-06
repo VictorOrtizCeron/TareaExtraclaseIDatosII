@@ -3,28 +3,16 @@ using namespace std;
 
 class Node {
 
-private:
+public:
     int valor;
     Node* NextPTR;
-public:
-    int getValor(){
-        return valor;
-    }
-    void setValor(int num){
-        valor = num; 
-    }
-    Node* getNext(){
-        return NextPTR;
-    }
-    void setNext(Node* Next){
-        NextPTR = Next;
-    }
+
 };
 
 void printList(Node*n){
     while(n!= NULL){
-        cout<< n->getValor()<< endl;
-        n = n->getNext();
+        cout<< n->valor << endl;
+        n = n-> NextPTR;
     }
 }
 
@@ -38,12 +26,12 @@ int main(){
     Node*second = new Node();
     Node*third = new Node();
 
-    head->setValor(1); 
-    head -> setNext(second);
-    second->setValor(2);
-    second -> setNext(third);
-    third -> setValor(3);
-    third -> setNext(NULL);
+    head->valor = 1; 
+    head -> NextPTR = second;
+    second-> valor = 2;
+    second -> NextPTR = third;
+    third -> valor = 3;
+    third -> NextPTR = NULL;
 
     printList(head);
     cout << "ay lmaoo";
