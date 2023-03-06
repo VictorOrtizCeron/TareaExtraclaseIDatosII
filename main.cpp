@@ -1,9 +1,7 @@
 #include <iostream>
 using namespace std;
 
-
 class Node {
-
 
 private:
     int valor;
@@ -28,6 +26,10 @@ void printList(Node*n){
         cout<< n->getValor()<< endl;
         n = n->getNext();
     }
+}
+
+void xd(int){
+
 }
 
 int main(){
