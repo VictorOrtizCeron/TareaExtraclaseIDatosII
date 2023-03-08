@@ -13,13 +13,6 @@ public:
         this->NextPTR = nullptr;
     }
 };
-//método que imprime lista de ints
-void printList(Node*n){
-    while(n!= NULL){
-        cout<< n->valor << endl;
-        n = n-> NextPTR;
-    }
-}
 // Clase de List
 class List{
 
@@ -52,10 +45,10 @@ public:
     }
 
 };
-
+//Clase de nodos de Collector
 class collectorNode{
     public:
-        Node*NodePTR;
+        Node * NodePTR;
         collectorNode * NextCollectorPTR;
 
     collectorNode(Node* DeletedNodePTR){
@@ -64,7 +57,7 @@ class collectorNode{
         this -> NextCollectorPTR = nullptr;
     }
 };
-
+//Clase de lista Collector
 class collectorList{
 
 public: 
@@ -96,9 +89,26 @@ public:
     }
 
 };
+//método que imprime lista de ints
+void printList(Node*n){
+    while(n!= NULL){
+        cout<< n->valor << endl;
+        n = n-> NextPTR;
+    }
+}
+//método que imprime lista de direcciones de nodos en Collector List
+void printCollectorList(collectorNode*n){
+    while(n!= NULL){
+        cout<< n->NodePTR << endl;
+        n = n-> NextCollectorPTR;
+    }
+}
+
 int main(){
 
     List *newList = new List();
+
+    
 
     newList->insertFirst(1);
     newList->insertFirst(2);
@@ -110,7 +120,16 @@ int main(){
 
     printList(newList->head);
 
-    printf("%p\n",newList);
+    
+
+    collectorList*Collector = new collectorList();
+
+    Node * Prueba = new Node(5);
+
+    printf("%p\n",Prueba);
+    Collector->insertFirst(Prueba);
+
+    printCollectorList(Collector->head);
 
     return 0;
 }
