@@ -14,6 +14,7 @@ public:
     }
 };
 
+
 //método que imprime lista de ints
 void printList(Node*n){
     while(n!= NULL){
@@ -55,6 +56,19 @@ public:
 
 };
 
+class collectorNode{
+    public:
+        Node*NodePTR;
+        collectorNode * NextCollectorPTR;
+
+    collectorNode(Node* DeletedNodePTR){
+
+        this -> NodePTR = DeletedNodePTR;
+        this -> NextCollectorPTR = nullptr;
+    }
+};
+
+
 int main(){
 
     List *newList = new List();
@@ -68,6 +82,8 @@ int main(){
     newList ->deleteFirst();
 
     printList(newList->head);
+
+    printf("%p\n",newList);
 
     return 0;
 }
