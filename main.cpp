@@ -1,14 +1,20 @@
 #include <iostream>
 using namespace std;
 
+//Clase Node para lista de ints
 class Node {
 
 public:
     int valor;
     Node* NextPTR;
 
+    Node(int valor) {//constructor de la clase nodo 
+        this->valor= valor;
+        this->NextPTR = nullptr;
+    }
 };
 
+//método que imprime lista de ints
 void printList(Node*n){
     while(n!= NULL){
         cout<< n->valor << endl;
@@ -16,46 +22,52 @@ void printList(Node*n){
     }
 }
 
+// Clase de List
 class List{
 
 public: 
-    void insertarLista(Node* &lista, int n){
-        Node* nuevo_nodo = new Node();
-        nuevo_nodo -> valor = n;
 
-        Node* aux1 = lista;
-        Node* aux2;
+    Node * head;
 
-        while((aux1 != NULL) && (aux1 -> valor < n)){
-            aux2 = aux1;
-            aux1 = aux1 -> NextPTR;
+    int size;
+    
+    List(){
+        head = NULL;
+        size = 0;
+    }
+
+    void insertFirst(int valor){
+        Node* newNode = new Node(valor);
+        newNode -> NextPTR = head;
+        head = newNode;
+        size ++;
         }
-        //Este while y condicional es simplemente para que la lista quede en orden de valor creciente.
-        if(lista == aux1){
-            lista = nuevo_nodo;
-        }else{
-            aux2 -> NextPTR = nuevo_nodo;
+
+    void deleteFirst(){
+        if(head != nullptr){
+
+            Node* Temp = head;
+            head = head -> NextPTR;
+            delete Temp;
+            size--;
         }
-        nuevo_nodo -> NextPTR = aux1;
     }
 
 };
 
 int main(){
 
-    Node*lista = NULL;
-    Node*head = new Node();
-    Node*second = new Node();
-    Node*third = new Node();
+    List *newList = new List();
 
-    head->valor = 1; 
-    head -> NextPTR = second;
-    second-> valor = 2;
-    second -> NextPTR = third;
-    third -> valor = 3;
-    third -> NextPTR = NULL;
+    newList->insertFirst(1);
+    newList->insertFirst(2);
+    newList->insertFirst(3);
 
-    printList(head);
-    cout << "ay lmaoo";
+    printList(newList->head);
+    cout << "\n";
+    newList ->deleteFirst();
+
+    printList(newList->head);
+
     return 0;
 }
