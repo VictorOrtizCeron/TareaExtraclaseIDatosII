@@ -13,8 +13,6 @@ public:
         this->NextPTR = nullptr;
     }
 };
-
-
 //método que imprime lista de ints
 void printList(Node*n){
     while(n!= NULL){
@@ -22,7 +20,6 @@ void printList(Node*n){
         n = n-> NextPTR;
     }
 }
-
 // Clase de List
 class List{
 
@@ -68,7 +65,37 @@ class collectorNode{
     }
 };
 
+class collectorList{
 
+public: 
+
+    collectorNode* head;
+
+    int size;
+    
+    collectorList(){
+        head = NULL;
+        size = 0;
+    }
+
+    void insertFirst( Node* DeletedNodePTR){
+        collectorNode* newNode = new collectorNode(DeletedNodePTR);
+        newNode -> NextCollectorPTR = head;
+        head = newNode;
+        size ++;
+        }
+
+    void deleteFirst(){
+        if(head != nullptr){
+
+            collectorNode* Temp = head;
+            head = head -> NextCollectorPTR;
+            delete Temp;
+            size--;
+        }
+    }
+
+};
 int main(){
 
     List *newList = new List();
