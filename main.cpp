@@ -38,7 +38,7 @@ public:
 
     void deleteFirst(){
         if(head != nullptr){
-            cout<< "delete working"<<endl;
+           
             collectorNode* Temp = head;
             head = head -> NextCollectorPTR;
             delete Temp;
@@ -64,38 +64,25 @@ public:
 
     //Sobrecarga del método New para el Nodo regular. Aqui se debe validar el caso del nuevo nodo y asignar la memoria correspondiente
     void* operator new(size_t size) {
-        void* p;
+        
         //Si collector.size == o ; no mames malloc. Else, asignar de collector.
         if(Collector.size == 0){
-            cout<<"hola"<<endl;
-            void* p = malloc(sizeof(int*));
+            cout<<"Collector vacio"<<endl;
+            void* p = malloc(sizeof(size));
+            return p;
         }else{
-            cout<<"hola 2"<<endl;
-            void* p = Collector.head;
+            cout<<"Collector lleno"<<endl;
+            void* p = Collector.head ->NodePTR;
             Collector.deleteFirst();
+            return p;
         }
-        std::cout << "Custom new called, size = " << size << ", pointer = " << p << std::endl;
-        cout<< Collector.size <<endl;
-        return p;
-        /**
-         * if(Collector.size==0){
-         *  automatico facilongo
-         * }
-         * else{
-         *  void * p = collector.head;
-         *  Collector.deleteFirst();
-         *  return p;
-         * }
-         * 
-        */
+        
     }
 
     void operator delete(void* p){
         
         Collector.insertFirst(p);
-        cout << "Custom delete called, pointer = " << p << endl;
-        //meter en collector xD
-        ::operator delete(p);
+        free(p);
     }
 };
 // Clase de List
@@ -148,23 +135,36 @@ void printCollectorList(collectorNode*n){
 int main(){
     cout<< "comienza"<<endl;
     //List *newList = new List();//crea nueva lista
-    void * prueba ;
+    void * prueba = malloc(sizeof(Node*));
 
-    void * prueba2 ;
+    void * prueba2 = malloc(sizeof(Node*));
 
     Collector.insertFirst(prueba);
     
     Collector.insertFirst(prueba2);
 
-    printCollectorList(Collector.head);
-
-    Collector.deleteFirst();
+    cout<< "Print 1 de Collector list:"<<endl;
 
     printCollectorList(Collector.head);
 
-    Node * Prueba = new Node(5);//Crea un puntero de nodo  para pruebas únicamente.
+    Node * testNew1 = new Node(5);
 
-    delete Prueba;
+    cout<< "Print 2 de Collector list:"<<endl;
+    printCollectorList(Collector.head);
+
+    Node * testNew2 = new Node(5);
+
+    cout<< "Print 3 de Collector list:"<<endl;
+    printCollectorList(Collector.head);
+
+    delete testNew2;
+
+    cout<< "Print 4 de Collector list:"<<endl;
+    printCollectorList(Collector.head);
+
+    //Crea un puntero de nodo  para pruebas únicamente.
+
+    //delete Prueba;
 
     //Liberar memoria pls
 
