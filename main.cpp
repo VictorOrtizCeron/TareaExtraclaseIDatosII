@@ -67,11 +67,15 @@ public:
         void* p;
         //Si collector.size == o ; no mames malloc. Else, asignar de collector.
         if(Collector.size == 0){
+            cout<<"hola"<<endl;
             void* p = malloc(sizeof(int*));
         }else{
+            cout<<"hola 2"<<endl;
             void* p = Collector.head;
             Collector.deleteFirst();
         }
+        std::cout << "Custom new called, size = " << size << ", pointer = " << p << std::endl;
+        cout<< Collector.size <<endl;
         return p;
         /**
          * if(Collector.size==0){
@@ -84,10 +88,6 @@ public:
          * }
          * 
         */
-        void* p = malloc(sizeof(int*));
-        std::cout << "Custom new called, size = " << size << ", pointer = " << p << std::endl;
-        cout<< Collector.size <<endl;
-        return p;
     }
 
     void operator delete(void* p){
