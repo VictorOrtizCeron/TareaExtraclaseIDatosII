@@ -64,7 +64,15 @@ public:
 
     //Sobrecarga del método New para el Nodo regular. Aqui se debe validar el caso del nuevo nodo y asignar la memoria correspondiente
     void* operator new(size_t size) {
+        void* p;
         //Si collector.size == o ; no mames malloc. Else, asignar de collector.
+        if(Collector.size == 0){
+            void* p = malloc(sizeof(int*));
+        }else{
+            void* p = Collector.head;
+            Collector.deleteFirst();
+        }
+        return p;
         /**
          * if(Collector.size==0){
          *  automatico facilongo
