@@ -67,11 +67,11 @@ public:
         
         //Si collector.size == o ; no mames malloc. Else, asignar de collector.
         if(Collector.size == 0){
-            cout<<"Collector vacio"<<endl;
+            
             void* p = malloc(sizeof(size));
             return p;
         }else{
-            cout<<"Collector lleno"<<endl;
+            
             void* p = Collector.head ->NodePTR;
             Collector.deleteFirst();
             return p;
@@ -120,21 +120,29 @@ public:
 //método que imprime lista de ints
 void printList(Node*n){
     while(n!= NULL){
-        cout<< n->valor << endl;
+        cout<< "Número almacenado en el nodo: "<<n->valor<< "  , Puntero del nodo: "<< n << endl;
         n = n-> NextPTR;
     }
 }
 //método que imprime lista de direcciones de nodos en Collector List
 void printCollectorList(collectorNode*n){
-    while(n!= NULL){
-        cout<< n->NodePTR << endl;
-        n = n-> NextCollectorPTR;
+    if(Collector.size == 0){
+        cout<< "Collector vacio"<<endl;
+    }
+    else{
+        while(n!= NULL){
+            cout<< n->NodePTR << endl;
+            n = n-> NextCollectorPTR;
+        }
     }
 }
 //Main de pruebas
 int main(){
-    cout<< "comienza"<<endl;
-    //List *newList = new List();//crea nueva lista
+    
+    cout<<"------------------------------------------------------------------------------------------------------------------------"<<endl;
+    cout<< "Test con nodos"<<endl;
+    cout<<""<<endl;
+
     void * prueba = malloc(sizeof(Node*));
 
     void * prueba2 = malloc(sizeof(Node*));
@@ -146,45 +154,68 @@ int main(){
     cout<< "Print 1 de Collector list:"<<endl;
 
     printCollectorList(Collector.head);
-
-    Node * testNew1 = new Node(5);
-
+    cout<<""<<endl;
+    cout<<"Creación primer nodo"<<endl;
+    Node * NodoTest1 = new Node(1);
+    cout<< "Puntero de primer nodo: "<<NodoTest1<<endl;
+    cout<<""<<endl;
     cout<< "Print 2 de Collector list:"<<endl;
     printCollectorList(Collector.head);
-
-    Node * testNew2 = new Node(5);
-
+    cout<<""<<endl;
+    cout<<"Creación segundo nodo"<<endl;
+    Node * NodoTest2 = new Node(2);
+    cout<< "Puntero de segundo nodo: "<<NodoTest2<<endl;
+    cout<<""<<endl;
     cout<< "Print 3 de Collector list:"<<endl;
     printCollectorList(Collector.head);
-
-    delete testNew2;
-
+    cout<<""<<endl;
+    cout<<"Creacion de tercer nodo cuando collector está vacío"<<endl;
+    Node*NodoTest3 = new Node(3);
+    cout<<"Puntero de tercer nodo: "<< NodoTest3<<endl;
+    cout<<""<<endl;
+    cout<<"delete tercer nodo:"<< NodoTest3<<endl;
+    delete NodoTest3;
+    cout<<""<<endl;
     cout<< "Print 4 de Collector list:"<<endl;
     printCollectorList(Collector.head);
+    cout<<""<<endl;
+    cout<<""<<endl;
+    //Inicio de test con lista enlazada
+    Collector.deleteFirst();
+    cout<<"------------------------------------------------------------------------------------------------------------------------"<<endl;
+    cout<< "Test con Lista Enlazada"<<endl;
 
-    //Crea un puntero de nodo  para pruebas únicamente.
+    cout<<""<<endl;
+    
+    List * listaEnlazada = new List();
 
-    //delete Prueba;
+    listaEnlazada->insertFirst(1);
+    listaEnlazada->insertFirst(2);
+    listaEnlazada->insertFirst(3);
 
-    //Liberar memoria pls
+    printCollectorList(Collector.head);
+    cout<<""<<endl;
+    cout<< "Print de elementos int en lista enlazada"<< endl;
+    printList(listaEnlazada->head);
+    cout<<""<<endl;
 
+    cout<< "Print de elementos int en lista enlazada despues de un deleteFirst()"<< endl;
+    listaEnlazada->deleteFirst();
+    printList(listaEnlazada->head);
+    cout<<""<<endl;
 
-    //printf("%p\n",Prueba);//imprime dirección del nodo Prueba
-    //Collector->insertFirst(Prueba); //inserta puntero del nodo en collector list
-    //Inserción de nodos regulares en lista enlazada de ints
-    //newList->insertFirst(1);
-    //newList->insertFirst(2,Collector);
-    //newList->insertFirst(3,Collector);
+    cout<<"Print de Collector:"<< endl;
+    printCollectorList(Collector.head);
+    cout<<""<<endl;
 
-    //print de elementos de lista
-    //printList(newList->head);
-    //cout << "\n";
-    //eliminación de primer valor de lista
-    //newList ->deleteFirst();
-    //comprobación de funcionamiento de deleteFirst
-    //printList(newList->head);
-    //impresión de punteros de lista collector (Nil significa lista Collector vacía :D )
-    //printCollectorList(Collector->head);
+    cout<< "Print de elementos int en lista enlazada despues de agregar un 4"<< endl;
+    listaEnlazada->insertFirst(4);
+    printList(listaEnlazada->head);
+    cout<<""<<endl;
+
+    cout<<"Print de Collector:"<< endl;
+    printCollectorList(Collector.head);
+    cout<<""<<endl;
 
     return 0;
 }
